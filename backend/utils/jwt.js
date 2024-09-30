@@ -1,12 +1,8 @@
-const { createClerkClient } = require("@clerk/clerk-sdk-node");
-const { CLERK_PUBLISHABLE_KEY, CLERK_SECRET_KEY, CLERK_JWT_KEY } = require("../constants")
+const { CLERK_JWT_KEY } = require("../constants")
+const jwt = require("jsonwebtoken");
 
-const clerkClient = createClerkClient({
-    secretKey: CLERK_SECRET_KEY,
-    publishableKey: CLERK_PUBLISHABLE_KEY,
-})
 
-const validateAuth = async (req, res, next) => {
+const validateAuth =  (req, res, next) => {
     const authHeader = req.headers["authorization"];
     const token = authHeader && authHeader.split(" ")[1];
     // unauthorized
@@ -22,25 +18,16 @@ const validateAuth = async (req, res, next) => {
         });
     }
 
-    try {
-        const verifiedToken = await clerkClient.verifyToken(token, {
-            jwtKey: CLERK_JWT_KEY
-        })
-        req.verifiedToken = verifiedToken
-        next()
-
-    } catch(error) {
-        res.status(403).json({
-            status: false,
-            errors: [
-                {
-                    message: "Invalid Token or Token expired.",
-                    code: "INAVLID_TOKEN",
-                },
-            ],
-        });
-    }
-
+    jwt.verify(token,CLERK_JWT_KEY,(err,verifiedToken) => {
+        if(err) {
+            res.status(403).json({
+                message: "Invalid Token or Token expired."
+            });
+        } else {
+            req.verifiedToken = verifiedToken
+            next()
+        }
+    })
 }
 
 module.exports = validateAuth

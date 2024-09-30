@@ -4,7 +4,6 @@ const expenseSchema = new mongoose.Schema({
     clerkUserId: {
         type: String,
         required: true,
-        unique: true,
     },
     category: {
         type: String,
@@ -16,6 +15,10 @@ const expenseSchema = new mongoose.Schema({
     },
     amount: {
         type: Number,
+        required: true
+    },
+    purpose: {
+        type: String,
         required: true
     }
 },{

@@ -1,0 +1,73 @@
+{
+    "All": [],
+    "Essential Expenses": [
+        {
+            "name": "Housing",
+            "icon": "🏠"
+        },
+        {
+            "name": "Transportation",
+            "icon": "🚗"
+        },
+        {
+            "name": "Food",
+            "icon": "🍔"
+        },
+        {
+            "name": "Utilities and Services",
+            "icon": "💡"
+        },
+        {
+            "name": "Healthcare",
+            "icon": "⚕️"
+        },
+        {
+            "name": "Insurance",
+            "icon": "📑"
+        },
+        {
+            "name": "Debt Repayments",
+            "icon": "💳"
+        }
+    ],
+    "Non-Essential Expenses": [
+        {
+            "name": "Entertainment and Leisure",
+            "icon": "🎉"
+        },
+        {
+            "name": "Personal Care",
+            "icon": "💅"
+        },
+        {
+            "name": "Clothing and Accessories",
+            "icon": "👗"
+        }
+    ],
+
+    "Savings and Investments": [
+        {
+            "name": "Savings",
+            "icon": "💰"
+        },
+        {
+            "name": "Investments",
+            "icon": "📈"
+        }
+    ],
+
+    "Miscellaneous": [
+        {
+            "name": "Education and Self-Improvement",
+            "icon": "🎓"
+        },
+        {
+            "name": "Gifts and Donations",
+            "icon": "🎁"
+        },
+        {
+            "name": "Miscellaneous",
+            "icon": "🛠️"
+        }
+    ]
+}

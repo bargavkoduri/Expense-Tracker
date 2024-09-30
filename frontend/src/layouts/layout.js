@@ -16,7 +16,7 @@ export default function RootLayout() {
             routerReplace={(to) => navigate(to, { replace: true })}
             publishableKey={PUBLISHABLE_KEY}
         >
-            <header className="flex items-center justify-between bg-gray-100 p-4">
+            <header className="h-[10vh] flex items-center justify-between bg-gray-100 p-4">
                 <div>
                     <h1 className='font-bold text-xl'>MoneyMap</h1>
                 </div>
@@ -35,7 +35,7 @@ export default function RootLayout() {
                     </SignedOut>
                 </div>
             </header>
-            <main>
+            <main className='h-[90vh]'>
                 <Outlet />
             </main>
         </ClerkProvider>

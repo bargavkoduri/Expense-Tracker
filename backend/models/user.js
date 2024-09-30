@@ -16,6 +16,10 @@ const userSchema = new mongoose.Schema({
     },
     lastName: {
         type: String
+    },
+    expenses: {
+        type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Expense'}],
+        default: []
     }
 })
 
