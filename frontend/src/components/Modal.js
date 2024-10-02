@@ -4,7 +4,7 @@ import axios from "axios"
 import { useAuth } from "@clerk/clerk-react"
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL 
 
-const Modal = ({isVisible,setIsVisible}) => {
+const Modal = ({isVisible,setIsVisible,fetchExpenses}) => {
 
     const { getToken } = useAuth()
 
@@ -44,7 +44,14 @@ const Modal = ({isVisible,setIsVisible}) => {
                     Authorization: `Bearer ${token}`
                 }
             })
+            setFormData({
+                purpose: "",
+                amount: 0,
+                category: "Essential Expenses",
+                subCategory: "Housing"
+            })
             alert('Expense Added')
+            fetchExpenses()
             setIsVisible(false)
         } catch(err) {
             alert('Unable to process request')
@@ -56,8 +63,8 @@ const Modal = ({isVisible,setIsVisible}) => {
 
     return (
         <div className="fixed inset-0 bg-opacity-25 backdrop-blur-sm flex justify-center items-center">
-            <div className="w-[600px]">
-               <div className="bg-white px-4 py-8 rounded-lg">
+            <div className="w-[600px]" >
+                <div className="bg-white px-4 py-8 rounded-lg" style={{ border: "1px solid black" }}>
                     <div className="flex justify-between">
                         <h2 className="font-bold text-xl text-black">New Expense</h2>
                         <button className="text-gray-600 text-2xl" 
@@ -90,7 +97,7 @@ const Modal = ({isVisible,setIsVisible}) => {
                             </select>
                         </div>
                         <div className="mb-5">
-                            <label htmlFor="subcategory" className="block mb-2 text-sm font-medium text-gray-900">Category</label>
+                            <label htmlFor="subcategory" className="block mb-2 text-sm font-medium text-gray-900">Sub Category</label>
                             <select id="subcategory" name="subCategory" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" required onChange={handleChange} >
                             {
                                 subCategories.map((catg,index) => {

@@ -3,6 +3,7 @@ const router = Router()
 const { Webhook } = require('svix')
 const { WEBHOOK_ADD_USER_KEY, WEBHOOK_REM_USER_KEY } = require('../constants')
 const User = require("../models/user")
+const Expense = require('../models/expense')
 
 router.post('/adduser', async (req, res) => {
     try {
@@ -49,7 +50,7 @@ router.post('/adduser', async (req, res) => {
     }
 })
 
-router.post('/remuser', (req, res) => {
+router.post('/remuser',async(req, res) => {
     try {
         const headers = req.headers
         const payload = JSON.stringify(req.body)
@@ -72,7 +73,8 @@ router.post('/remuser', (req, res) => {
             'svix-signature': svix_signature,
         })
 
-
+        await User.deleteMany({ clerkUserId: evt.data.id })
+        await Expense.deleteMany({clerkUserId: evt.data.id})
 
         res.status(200).json({
             success: true,

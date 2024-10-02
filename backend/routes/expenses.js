@@ -38,9 +38,12 @@ router.get('/all', async (req, res) => {
     const clerkUserId = verifiedToken.sub
 
     try {
-        let {expenses} = await User
+        let user = await User
         .findOne({ clerkUserId: clerkUserId })
         .populate('expenses')
+        let expenses = []
+        if(user)
+            expenses = user.expenses
 
         res.json(expenses)
 
